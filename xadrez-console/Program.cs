@@ -7,13 +7,26 @@ namespace xadrez_console
     {
         static void Main(string[] args)
         {
-            PosicaoXadrez pos = new PosicaoXadrez('c', 7);
+            try
+            {
+                Tabuleiro tab = new Tabuleiro(8, 8);
 
-            Console.WriteLine(pos);
-            Console.WriteLine(pos.toPosicao());
+                tab.colocarPeca(new Torre(tab, Cor.Preta), new Posicao(0, 0));
+                tab.colocarPeca(new Torre(tab, Cor.Preta), new Posicao(1, 3));
+                tab.colocarPeca(new Rei(tab, Cor.Preta), new Posicao(2, 4));
 
-            Console.ReadLine();
+                tab.colocarPeca(new Torre(tab, Cor.Branca), new Posicao(3, 5));
+                tab.colocarPeca(new Torre(tab, Cor.Branca), new Posicao(5, 7));
+                tab.colocarPeca(new Rei(tab, Cor.Branca), new Posicao(1, 7));
 
+                Tela.imprimirTabuleiro(tab);
+
+                Console.ReadLine();
+            }
+            catch (TabuleiroException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
